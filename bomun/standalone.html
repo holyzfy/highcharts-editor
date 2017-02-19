@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Highcharts Editor</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://code.highcharts.com/stock/highstock.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://code.highcharts.com/adapters/standalone-framework.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://code.highcharts.com/highcharts-more.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://code.highcharts.com/modules/data.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="http://code.highcharts.com/modules/offline-exporting.js"></script>
+<script src="https://code.highcharts.com/modules/funnel.js"></script>
+<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+
+<link href="libs/highcharts-editor/highcharts-editor.min.css" type="text/css" rel="stylesheet"/>
+<script src="libs/highcharts-editor/highcharts-editor.js"></script>
+<script src="js/highcharts.editor.lang.zh_cn.js"></script>
+<script src="js/custom-template.js"></script>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width:100%;
+    height:100%;
+    background:#F5F5F5;
+    font-family: 'Roboto', sans-serif;
+}
+</style>
+
+</head>
+<body>
+<script>
+(function () {
+
+var chartOptions = {};
+
+var menuItems = [
+    {
+        text: '导出png图片',
+        onclick: function () {
+            this.exportChartLocal({
+                type: 'image/png'
+            });
+        },
+    },
+    {
+        text: '导出svg图片',
+        onclick: function () {
+            this.exportChartLocal({
+                type: 'image/svg+xml'
+            });
+        },
+    }
+];
+highed.setAttr(chartOptions, 'exporting.buttons.contextButton.menuItems', menuItems);
+
+var credits = {
+    href: 'http://www.bomun.com.cn',
+    text:'Bomun.com.cn'
+};
+
+highed.setAttr(chartOptions, 'credits', credits);
+
+var availableSettings = [
+    "title--text",
+    "subtitle--text",
+    "yAxis-title--text",
+
+    "chart--width",
+    "chart--height",
+
+    "chart--inverted",
+    "xAxis-title--text",
+    "xAxis--type",
+    "xAxis--opposite",
+    "xAxis--reversed",
+    "xAxis-labels--rotation",
+    "xAxis-crosshair",
+
+    "yAxis--type",
+    "yAxis--opposite",
+    "yAxis--reversed",
+    "yAxis-crosshair",
+
+    "series--type",
+    "series--width",
+    "series--neckWidth",
+    "series--neckHeight",
+
+    "data-labels",
+    "plotOptions-series-dataLabels--enabled",
+    "plotOptions-series-dataLabels-format",
+
+    "legend--enabled",
+    "legend--layout",
+    "legend--align",
+    "legend--verticalAlign"
+];
+
+highed.ready(function () {
+    highed.setLang('zh_cn');
+    highed.Editor(document.body, {
+        features: 'welcome import templates customize',
+        defaultChartOptions: chartOptions,
+        availableSettings: availableSettings
+    });
+});
+
+})();
+</script>   
+</body>
+</html>
